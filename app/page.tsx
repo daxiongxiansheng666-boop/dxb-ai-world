@@ -140,7 +140,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 relative">
+      <section className="py-32 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="section-title">
@@ -149,7 +149,7 @@ export default function Home() {
             <p className="text-gray-400 mt-4">全方位AI解决方案，助力你的智能之旅</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature) => (
               <Link
                 key={feature.title}
@@ -170,7 +170,7 @@ export default function Home() {
       </section>
 
       {/* Recent Posts */}
-      <section className="py-20 relative">
+      <section className="py-32 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
@@ -210,7 +210,7 @@ export default function Home() {
       </section>
 
       {/* Projects */}
-      <section className="py-20 relative">
+      <section className="py-32 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="section-title">
@@ -250,7 +250,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 relative">
+      <section className="py-32 relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="glass-card rounded-2xl p-12 neon-border">
             <h2 className="text-3xl font-bold text-white mb-4">

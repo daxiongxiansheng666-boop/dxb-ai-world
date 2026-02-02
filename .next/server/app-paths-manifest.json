@@ -1,6 +1,16 @@
 {
-  "/not-found": "app/not-found.js",
+  "/_not-found": "app/_not-found.js",
+  "/api/clawdbot/chat/route": "app/api/clawdbot/chat/route.js",
+  "/api/clawdbot/knowledge/route": "app/api/clawdbot/knowledge/route.js",
+  "/api/route": "app/api/route.js",
+  "/login/page": "app/login/page.js",
   "/page": "app/page.js",
+  "/register/page": "app/register/page.js",
+  "/about/page": "app/about/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/knowledge/page": "app/knowledge/page.js",
+  "/tools/page": "app/tools/page.js",
   "/tutorials/page": "app/tutorials/page.js",
-  "/login/page": "app/login/page.js"
+  "/projects/page": "app/projects/page.js",
+  "/blog/page": "app/blog/page.js"
 }
