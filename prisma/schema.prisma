@@ -1,0 +1,121 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 用户模型
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String?
+  avatar        String?
+  bio           String?
+  role          String    @default("user")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  posts         Post[]
+  projects      Project[]
+  comments      Comment[]
+  likes         Like[]
+}
+
+// 文章模型
+model Post {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  excerpt     String?
+  content     String
+  coverImage  String?
+  published   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id])
+  comments    Comment[]
+  likes       Like[]
+  tags        Tag[]
+}
+
+// 项目模型
+model Project {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  description String
+  content     String?
+  coverImage  String?
+  demoUrl     String?
+  githubUrl   String?
+  published   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id])
+  tags        Tag[]
+}
+
+// 标签模型
+model Tag {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  posts     Post[]
+  projects  Project[]
+}
+
+// 评论模型
+model Comment {
+  id        String    @id @default(cuid())
+  content   String
+  createdAt DateTime  @default(now())
+  postId    String
+  post      Post      @relation(fields: [postId], references: [id])
+  authorId  String
+  author    User      @relation(fields: [authorId], references: [id])
+}
+
+// 点赞模型
+model Like {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  postId    String
+  post      Post      @relation(fields: [postId], references: [id])
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+
+  @@unique([postId, userId])
+}
+
+// 工具模型
+model Tool {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  description String
+  icon        String?
+  category    String
+  status      String    @default("coming")
+  features    String[]
+  apiEndpoint String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// 知识库条目
+model Knowledge {
+  id        String    @id @default(cuid())
+  title     String
+  content   String
+  category  String
+  tags      String[]
+  source    String?
+  syncedAt  DateTime  @default(now())
+}
