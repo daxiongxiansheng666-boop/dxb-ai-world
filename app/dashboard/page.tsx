@@ -1,4 +1,8 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export const metadata = {
   title: '个人中心 - 大熊的AI世界',
@@ -6,6 +10,15 @@ export const metadata = {
 };
 
 export default function DashboardPage() {
+  const router = useRouter();
+
+  // 路由守卫：检查登录状态
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn) {
+      router.push('/login');
+    }
+  }, [router]);
   const stats = {
     posts: 12,
     projects: 5,

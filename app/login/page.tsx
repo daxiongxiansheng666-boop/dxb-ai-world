@@ -6,10 +6,27 @@ import Link from 'next/link';
 export default function LoginPage() {
   const [form, setForm] = useState({ email: '', password: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // 处理登录逻辑
-    console.log('Login:', form);
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (data.success) {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('token', data.token);
+        window.location.href = '/dashboard';
+      } else {
+        alert(data.message || '登录失败');
+      }
+    } catch (error) {
+      console.error('登录失败:', error);
+      alert('登录失败，请重试');
+    }
   };
 
   return (
@@ -72,20 +89,8 @@ export default function LoginPage() {
           {/* Divider */}
           <div className="flex items-center my-6">
             <div className="flex-grow border-t border-white/10" />
-            <span className="px-4 text-gray-500 text-sm">或</span>
+            <span className="px-4 text-gray-500 text-sm">暂不支持第三方登录</span>
             <div className="flex-grow border-t border-white/10" />
-          </div>
-
-          {/* Social Login */}
-          <div className="grid grid-cols-2 gap-4">
-            <button className="flex items-center justify-center px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
-              <span className="text-xl mr-2">🔗</span>
-              <span className="text-gray-300 text-sm">GitHub</span>
-            </button>
-            <button className="flex items-center justify-center px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
-              <span className="text-xl mr-2">🔵</span>
-              <span className="text-gray-300 text-sm">Google</span>
-            </button>
           </div>
 
           {/* Footer */}
